@@ -73,7 +73,7 @@ function getLastQuestionnaireResponse(client) {
             let id = quest.entry[0].resource.id;
             client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=100").then((bundle) => {
                 console.log(bundle);
-                document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
+                // document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
             });
         } else {
             console.log("Could not find questionnaire");
