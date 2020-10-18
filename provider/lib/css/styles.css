@@ -32,14 +32,17 @@ body {
   position: fixed;
 }
 
-.survey {
+.main {
   grid-area: main;
   background-color: #2b4865;
 }
 
+.survey {
+  visibility: hidden;
+}
+
 .chart {
-  grid-area: main;
-  background-color: #2b4865;
+  visibility: hidden;
 }
 
 .main-header {
