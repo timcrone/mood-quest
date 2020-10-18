@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="lib/css/bars-square.css">
   <script src="lib/js/jquery-3.5.1.js"></script>
   <script src="lib/js/jquery.barrating.js"></script>
+  <script src="lib/js/jquery.barrating.js"></script>
+  <script src="node_modules/chart.js/dist/Chart.js"></script>
 </head>
 
 <body>
@@ -22,7 +24,7 @@
         <span class="banner-value" id="dob">..</span>
       </div>
       <div>
-        <button class="banner-value" id="chart" style="background: #2b4865">View History</button>
+        <button class="banner-value" id="chartButton" style="background: #2b4865">View History</button>
       </div>
       <div>
         Progress:
@@ -33,13 +35,13 @@
       </div>
     </header>
 
-    <main>
-      <section class="chart">
+    <main class="main">
+      <section class="chart" id="chartSegment">
         <canvas id="bdrs-chart" width="1000" height="400"></canvas>
         <canvas id="mood-chart" width="1000" height="400"></canvas>
         <div class="small-card">Testing</div>
       </section>
-      <section class="survey">
+      <section class="survey" id="surveySection">
         <section class="main-overview"> <!-- BDRS 01 -->
           <div class="small-card">
             Depressed mood<br>

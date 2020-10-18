@@ -38,11 +38,11 @@ body {
 }
 
 .survey {
-  visibility: hidden;
+  display: block;
 }
 
 .chart {
-  visibility: hidden;
+  display: none;
 }
 
 .main-header {

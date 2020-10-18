@@ -156,7 +156,9 @@ function addQuestionnaireResponse() {
     });
 }
 
-function buildChart(client) {
+function buildChart() {
+    document.getElementById('chartSection').style.display = 'block';
+    document.getElementById('surveySection').style.display = 'none';
     var bdrs_context = document.getElementById('bdrs-chart');
     var mood_context = document.getElementById('mood-chart');
 
@@ -237,18 +239,19 @@ function buildChart(client) {
 ///// Begin execution
     barratings();
     let current_response = {};
+
 // LOCAL
 //once fhir client is authorized then the following functions can be executed
-//     const client = new FHIR.client({
-//         serverUrl: "https://r4.smarthealthit.org",
-//         tokenResponse: {
-//             patient: "5214a564-9117-4ffc-a88c-25f90239240b"
-//         }
-//     });
+    Promise.resolve(new FHIR.client({
+        serverUrl: "https://r4.smarthealthit.org",
+        tokenResponse: {
+            patient: "5214a564-9117-4ffc-a88c-25f90239240b"
+        }
+    })).then((client) => {
 // !LOCAL
 
 // REMOTE
-FHIR.oauth2.ready().then((client) => {
+// FHIR.oauth2.ready().then((client) => {
 // !REMOTE
 
 // get patient object and then display its demographics info in the banner
@@ -257,15 +260,10 @@ FHIR.oauth2.ready().then((client) => {
             displayPatient(patient);
         }
     );
-    getLastQuestionnaireResponse(client);
     checkQuestionnaire(client).then((result) => {
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
     });
-
-
-    //event listener when the add button is clicked to call the function that will add the note to the weight observation
-    // document.getElementById('add').addEventListener('click', addWeightAnnotation);
-
+    document.getElementById('chartButton').addEventListener('click', buildChart);
 //REMOTE
 }).catch(console.error);
 //REMOTE
