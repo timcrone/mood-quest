@@ -32,8 +32,12 @@ body {
   position: fixed;
 }
 
+.survey {
+  grid-area: main;
+  background-color: #2b4865;
+}
 
-.main {
+.chart {
   grid-area: main;
   background-color: #2b4865;
 }
