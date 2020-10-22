@@ -156,15 +156,28 @@ function addQuestionnaireResponse() {
     });
 }
 
-function buildChart() {
+function displaySurvey() {
+    document.getElementById('chartButton').removeEventListener('click', displaySurvey);
+    document.getElementById('chartButton').addEventListener('click', buildChart);
+    document.getElementById('chartSection').style.display = 'none';
+    document.getElementById('surveySection').style.display = 'block';
+}
+
+function displayChart() {
+    document.getElementById('chartButton').addEventListener('click', buildChart);
+    document.getElementById('chartButton').addEventListener('click', displaySurvey);
     document.getElementById('chartSection').style.display = 'block';
     document.getElementById('surveySection').style.display = 'none';
+}
+
+function buildChart(client) {
     var bdrs_context = document.getElementById('bdrs-chart');
     var mood_context = document.getElementById('mood-chart');
 
     var bdrs_chart = new Chart(bdrs_context, {
-        type: 'bar',
+        type: 'line',
         data: {
+            stacked: true,
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
                 label: '# of Votes',
@@ -263,7 +276,8 @@ function buildChart() {
     checkQuestionnaire(client).then((result) => {
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
     });
-    document.getElementById('chartButton').addEventListener('click', buildChart);
+    buildChart(client);
+    document.getElementById('chartButton').addEventListener('click', displayChart);
 //REMOTE
 }).catch(console.error);
 //REMOTE
