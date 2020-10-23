@@ -178,9 +178,9 @@ function buildChart(client) {
         type: 'line',
         data: {
             stacked: true,
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
             datasets: [{
-                label: '# of Votes',
+                label: 'BDRS Score',
                 data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -214,10 +214,10 @@ function buildChart(client) {
     var mood_chart = new Chart(mood_context, {
         type: 'line',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Mood Score',
+                data: [[12, 19, 3, 5, 2, 3],[7, 5, 3, 5, 2, 3]],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
