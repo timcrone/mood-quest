@@ -212,7 +212,7 @@ function buildChart(client) {
         }
     });
     var mood_chart = new Chart(mood_context, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
