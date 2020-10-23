@@ -217,7 +217,9 @@ function buildChart(client) {
             labels: ['January', 'February', 'March', 'April', 'May', 'June'],
             datasets: [{
                 label: 'Mood Score',
-                data: [[7,2,3,4], [1,3,4,5], [3,5,4,3], [5,6,3,1], [2,3,1,5], [3,7,3,1]],
+                datasets: [{data: [7, 1, 5, 3, 1, 6]},
+                    {data: [3, 2, 1, 6, 3, 1]},
+                    {data: [3,3,1,6,6,1]}]
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
