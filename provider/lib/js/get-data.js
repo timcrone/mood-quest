@@ -243,6 +243,7 @@ function buildChart(client) {
             }]
         },
         options: {
+            responsive: false,
             scales: {
                 yAxes: [{
                     stacked: true,
