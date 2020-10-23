@@ -6,8 +6,8 @@ function barratings() {
     $('#mood_elated').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodElated });
     $('#mood_bad').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodBad });
     $('#mood_angry').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAngry });
-    $('#bdrs_irritable').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodIrritable });
-    $('#bdrs_energetic').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodEnergetic });
+    $('#mood_irritable').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodIrritable });
+    $('#mood_energetic').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodEnergetic });
 }
 
 // helper function to process fhir resource to get the patient name.
