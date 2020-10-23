@@ -240,6 +240,7 @@ function buildChart(client) {
         options: {
             scales: {
                 yAxes: [{
+                    stacked: true,
                     ticks: {
                         beginAtZero: true
                     }
