@@ -219,6 +219,9 @@ function buildChart(client) {
                 label: 'Mood Score',
                 datasets: [{data: [7, 1, 5, 3, 1, 6]},
                     {data: [3, 2, 1, 6, 3, 1]},
+                    {data: [3, 2, 1, 6, 3, 1]},
+                    {data: [3, 2, 1, 6, 3, 1]},
+                    {data: [3, 2, 1, 6, 3, 1]},
                     {data: [3,3,1,6,6,1]}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
