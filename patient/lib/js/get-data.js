@@ -31,7 +31,8 @@ function displayPatient(pt) {
 
 // Gets the BDRS questionnaire reference
 async function checkQuestionnaire(client) {
-    let result = await getQuestionnaire(client);
+    let dquest = defaultQuestionnaire()
+    let result = await getQuestionnaire(client, dquest);
     if (result.total > 0) {
         return result.entry[0].resource;
     }
@@ -39,8 +40,9 @@ async function checkQuestionnaire(client) {
     return result;
 }
 
-function getQuestionnaire(client) {
-    return client.request("Questionnaire?name=https://doi.org/10.1111/j.1399-5618.2007.00536.x");
+function getQuestionnaire(client, dquest) {
+    let query = "Questionnaire?name=" + dquest.name;
+    return client.request(query);
 }
 
 // Given a list of .item s, sum their answer[0].valueInteger s
@@ -51,8 +53,8 @@ function tally(items) {
     return sum;
 }
 
-function getLastQuestionnaireResponse(client) {
-    getQuestionnaire(client).then((quest) => {
+function getLastQuestionnaireResponse(client, dquest) {
+    getQuestionnaire(client, dquest).then((quest) => {
         if (quest.total > 0) {
             let id = quest.entry[0].resource.id;
             client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=100").then((bundle) => {
@@ -163,7 +165,7 @@ FHIR.oauth2.ready().then((client) => {
             displayPatient(patient);
         }
     );
-    getLastQuestionnaireResponse(client);
+    getLastQuestionnaireResponse(client, displayPatient(defaultQuestionnaire()));
     checkQuestionnaire(client).then((result) => {
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
     });

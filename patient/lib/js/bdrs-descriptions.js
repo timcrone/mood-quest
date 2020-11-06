@@ -45,7 +45,7 @@ function setDescription(elem, val) {
 function setDescriptionMoodAnxious(val) { let id="mood_anxious"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
     case "1": result = "brief or transient periods of depression, or mildly depressed mood"; break;
-    case "2": result = "depressed mood is clearly butnot consistently present and other emotions are ex-pressed, or depression is of moderate intensity"; break;
+    case "2": result = "depressed mood is clearly but not consistently present and other emotions are expressed, or depression is of moderate intensity"; break;
     case "3": result = "pervasive or continuous depressed mood of marked intensity"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
@@ -79,9 +79,9 @@ function setDescriptionMoodIrritable(val) { let id="mood_irritable"; let result 
 
 function setDescriptionMoodEnergetic(val) { let id="mood_energetic"; let result = "undefined"; switch (val) {
     case "0": result = "normal"; break;
-    case "1": result = "slight reduction in social engage-ment with no impairment in social or interpersonalfunction"; break;
-    case "2": result = "clear reduction in social engage-ment with some functional sequelae, e.g., avoidssome social engagements or conversations"; break;
-    case "3": result = "marked reduction in social interac-tion or avoidance of almost all forms of socialcontact, e.g., refuses to answer the phone or see friends or family"; break;
+    case "1": result = "slight reduction in social engagement with no impairment in social or interpersonal function"; break;
+    case "2": result = "clear reduction in social engagement with some functional sequelae, e.g., avoids some social engagements or conversations"; break;
+    case "3": result = "marked reduction in social interaction or avoidance of almost all forms of social contact, e.g., refuses to answer the phone or see friends or family"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function defaultQuestionnaire() {

@@ -45,7 +45,7 @@ function setDescription(elem, val) {
 function setDescriptionBDRS01(val) { let id="bdrs01"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
     case "1": result = "brief or transient periods of depression, or mildly depressed mood"; break;
-    case "2": result = "depressed mood is clearly butnot consistently present and other emotions are ex-pressed, or depression is of moderate intensity"; break;
+    case "2": result = "depressed mood is clearly but not consistently present and other emotions are expressed, or depression is of moderate intensity"; break;
     case "3": result = "pervasive or continuous depressed mood of marked intensity"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
@@ -83,100 +83,100 @@ function setDescriptionBDRS03b(val) { let id="bdrs03b"; let result = "undefined"
 
 function setDescriptionBDRS04(val) { let id="bdrs04"; let result = "undefined"; switch (val) {
     case "0": result = "normal"; break;
-    case "1": result = "slight reduction in social engage-ment with no impairment in social or interpersonalfunction"; break;
-    case "2": result = "clear reduction in social engage-ment with some functional sequelae, e.g., avoidssome social engagements or conversations"; break;
-    case "3": result = "marked reduction in social interac-tion or avoidance of almost all forms of socialcontact, e.g., refuses to answer the phone or see friends or family"; break;
+    case "1": result = "slight reduction in social engagement with no impairment in social or interpersonal function"; break;
+    case "2": result = "clear reduction in social engagement with some functional sequelae, e.g., avoids some social engagements or conversations"; break;
+    case "3": result = "marked reduction in social interaction or avoidance of almost all forms of social contact, e.g., refuses to answer the phone or see friends or family"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS05(val) { let id="bdrs05"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "able to engage in usual activities butwith increased eﬀort"; break;
-    case "2": result = "signiﬁcant reduction in energyleading to reduction of some role-speciﬁc activities"; break;
-    case "3": result = "leaden paralysis or cessation ofalmost all role-speciﬁc activities, e.g., spendsexcessive time in bed, avoids answering the phone,poor personal hygiene"; break;
+    case "1": result = "able to engage in usual activities but with increased effort"; break;
+    case "2": result = "significant reduction in energy leading to reduction of some role-specific activities"; break;
+    case "3": result = "leaden paralysis or cessation of almost all role-specific activities, e.g., spends excessive time in bed, avoids answering the phone,poor personal hygiene"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS06(val) { let id="bdrs06"; let result = "undefined"; switch (val) {
     case "0": result = "normal motivation"; break;
-    case "1": result = "slight reduction in motivation withno reduction in function"; break;
-    case "2": result = "reduced motivation or drivewith signiﬁcantly reduced volitional activity orrequires substantial eﬀort to maintain usual levelof function"; break;
-    case "3": result = "reduced motivation or drive suchthat goal-directed behaviour or function is mark-edly reduced"; break;
+    case "1": result = "slight reduction in motivation with no reduction in function"; break;
+    case "2": result = "reduced motivation or drive with significantly reduced volitional activity or requires substantial effort to maintain usual level of function"; break;
+    case "3": result = "reduced motivation or drive such that goal-directed behaviour or function is markedly reduced"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS07(val) { let id="bdrs07"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight impairment of attention,concentration, or memory with no functionalimpairment"; break;
-    case "2": result = "signiﬁcant impairment of atten-tion, concentration, or forgetfulness with somefunctional impairment"; break;
-    case "3": result = "marked impairment of concentra-tion or memory with substantial functionalimpairment, e.g., unable to read or watch TV"; break;
+    case "1": result = "slight impairment of attention,concentration, or memory with no functional impairment"; break;
+    case "2": result = "significant impairment of attention, concentration, or forgetfulness with some functional impairment"; break;
+    case "3": result = "marked impairment of concentration or memory with substantial functional impairment, e.g., unable to read or watch TV"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS08(val) { let id="bdrs08"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "transient worry or tension aboutminor matters"; break;
-    case "2": result = "signiﬁcant anxiety, tension orworry, or some accompanying somatic features"; break;
-    case "3": result = "marked continuous anxiety, tensionor worry that interferes with normal activity, orpanic attacks"; break;
+    case "1": result = "transient worry or tension about minor matters"; break;
+    case "2": result = "significant anxiety, tension or worry, or some accompanying somatic features"; break;
+    case "3": result = "marked continuous anxiety, tension or worry that interferes with normal activity, or panic attacks"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS09(val) { let id="bdrs09"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight reduction in pleasure fromusually pleasurable activities"; break;
-    case "2": result = "signiﬁcant reduction in pleasurefrom usually pleasurable activities; some pleasurefrom isolated activities retained"; break;
-    case "3": result = "complete inability to experiencepleasure"; break;
+    case "1": result = "slight reduction in pleasure from usually pleasurable activities"; break;
+    case "2": result = "significant reduction in pleasure from usually pleasurable activities; some pleasure from isolated activities retained"; break;
+    case "3": result = "complete inability to experience pleasure"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS10(val) { let id="bdrs10"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight constriction of range of aﬀect,or transient reduction in range or intensity offeelings"; break;
-    case "2": result = "signiﬁcant constriction ofrange or intensity of feelings with preservation ofsome emotions, e.g., unable to cry"; break;
-    case "3": result = "marked and pervasive constrictionof range of aﬀect or inability to experience usualemotions"; break;
+    case "1": result = "slight constriction of range of affect,or transient reduction in range or intensity of feelings"; break;
+    case "2": result = "signiﬁcant constriction of range or intensity of feelings with preservation of some emotions, e.g., unable to cry"; break;
+    case "3": result = "marked and pervasive constriction of range of affect or inability to experience usual emotions"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS11(val) { let id="bdrs11"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
     case "1": result = "slight decrease in sense of self-worth"; break;
-    case "2": result = "some thoughts of worthlessnessand decreased self-worth"; break;
-    case "3": result = "marked, pervasive, or persistentfeelings of worthlessness, e.g., feels others betteroﬀ without them, unable to appreciate positiveattributes"; break;
+    case "2": result = "some thoughts of worthlessness and decreased self-worth"; break;
+    case "3": result = "marked, pervasive, or persistent feelings of worthlessness, e.g., feels others better off without them, unable to appreciate positive attributes"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS12(val) { let id="bdrs12"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "occasional and mild feelings of notbeing able to cope as usual, or pessimism"; break;
-    case "2": result = "often feels unable to cope, orsigniﬁcant feelings of helplessness or hopelessnesswhich lift at times"; break;
-    case "3": result = "marked and persistent feelings ofpessimism, helplessness, or hopelessness"; break;
+    case "1": result = "occasional and mild feelings of not being able to cope as usual, or pessimism"; break;
+    case "2": result = "often feels unable to cope, or signiﬁcant feelings of helplessness or hopelessness which lift at times"; break;
+    case "3": result = "marked and persistent feelings of pessimism, helplessness, or hopelessness"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS13(val) { let id="bdrs13"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "thoughts that life is not worthwhileor is meaningless"; break;
-    case "2": result = "thoughts of dying or death, butwith no active suicide thoughts or plans"; break;
+    case "1": result = "thoughts that life is not worthwhile or is meaningless"; break;
+    case "2": result = "thoughts of dying or death, but with no active suicide thoughts or plans"; break;
     case "3": result = "thoughts or plans of suicide"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS14(val) { let id="bdrs14"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight decrease in self-esteem orincreased self-criticism"; break;
-    case "2": result = "signiﬁcant thoughts of failure,self-criticism, inability to cope, or ruminationsregarding past failures and the eﬀect on others;able to recognize as excessive"; break;
-    case "3": result = "marked, pervasive, or persistentguilt, e.g., feelings of deserving punishment, ordoes not clearly recognize as excessive"; break;
+    case "1": result = "slight decrease in self-esteem or increased self-criticism"; break;
+    case "2": result = "significant thoughts of failure,self-criticism, inability to cope, or ruminations regarding past failures and the effect on others; able to recognize as excessive"; break;
+    case "3": result = "marked, pervasive, or persistent guilt, e.g., feelings of deserving punishment, or does not clearly recognize as excessive"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS15(val) { let id="bdrs15"; let result = "undefined"; switch (val) {
     case "0": result = "absent"; break;
-    case "1": result = "mild overvalued ideas, e.g., self-criticism or pessimism without clear eﬀect onbehaviour"; break;
-    case "2": result = "signiﬁcant overvalued ideaswith clear eﬀect on behaviour, e.g., strong guiltfeelings, clear thoughts that others would be betteroﬀ without them"; break;
+    case "1": result = "mild overvalued ideas, e.g., self-criticism or pessimism without clear effect on behaviour"; break;
+    case "2": result = "significant overvalued ideas with clear effect on behaviour, e.g., strong guilt feelings, clear thoughts that others would be better off without them"; break;
     case "3": result = "clear psychotic symptoms, e.g.,delusions or hallucinations"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS16(val) { let id="bdrs16"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight subjective irritability; may notbe overtly present"; break;
-    case "2": result = "verbal snappiness and irritabil-ity that is clearly observable in the interview"; break;
-    case "3": result = "reports of physical outbursts, e.g.,throwing ⁄ breaking objects, or markedly abusiveverbal outbursts"; break;
+    case "1": result = "slight subjective irritability; may not be overtly present"; break;
+    case "2": result = "verbal snappiness and irritability that is clearly observable in the interview"; break;
+    case "3": result = "reports of physical outbursts, e.g.,throwing ⁄ breaking objects, or markedly abusive verbal outbursts"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS17(val) { let id="bdrs17"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "subjective reports of mild increase inmood lability"; break;
-    case "2": result = "moodlabilityclearlyobservable,moderate in intensity"; break;
-    case "3": result = "marked and dominant moodlability, frequent or dramatic swings in mood"; break;
+    case "1": result = "subjective reports of mild increase in mood lability"; break;
+    case "2": result = "mood lability clearly observable, moderate in intensity"; break;
+    case "3": result = "marked and dominant mood lability, frequent or dramatic swings in mood"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS18(val) { let id="bdrs18"; let result = "undefined"; switch (val) {
@@ -188,16 +188,16 @@ function setDescriptionBDRS18(val) { let id="bdrs18"; let result = "undefined"; 
 
 function setDescriptionBDRS19(val) { let id="bdrs19"; let result = "undefined"; switch (val) {
     case "0": result = "nil"; break;
-    case "1": result = "slight increase in the rate orquantity of speech"; break;
-    case "2": result = "racing thoughts, signiﬁcantlymore talkative, clearly distractible, or some cir-cumstantiality; does not impede interview"; break;
-    case "3": result = "flight of ideas; interferes withinterview"; break;
+    case "1": result = "slight increase in the rate or quantity of speech"; break;
+    case "2": result = "racing thoughts, significantly more talkative, clearly distractible, or some circumstantiality; does not impede interview"; break;
+    case "3": result = "flight of ideas; interferes with interview"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function setDescriptionBDRS20(val) { let id="bdrs20"; let result = "undefined"; switch (val) {
     case "0": result = "normal"; break;
     case "1": result = "slight restlessness"; break;
     case "2": result = "clear increase in level of agitation"; break;
-    case "3": result = "marked agitation, e.g., near con-tinuous pacing or wringing hands"; break;
+    case "3": result = "marked agitation, e.g., near continuous pacing or wringing hands"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
 function defaultQuestionnaire() {
@@ -206,7 +206,7 @@ function defaultQuestionnaire() {
         status: "active",
         title: "Bipolar Depression Rating Scale (BDRS)",
         date: "2007",
-        name: "https://doi.org/10.1111/j.1399-5618.2007.00536.x",
+        name: "https://doi.org/10.1111/j.1399-5618.2007.00536.x:version:1.0",
         code: [ {
             system: "http://snomed.info/sct",
             code: "416767005"
@@ -324,6 +324,5 @@ function defaultQuestionnaire() {
             }
         ]
     }
-    console.log("Generated questionnaire");
     return(qaire);
 }
