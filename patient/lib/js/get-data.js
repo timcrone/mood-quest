@@ -1,5 +1,7 @@
 //adapted from the lab 3.2 materials
 
+const LOCAL=true
+
 // set up ratings
 function barratings() {
     $('#mood_anxious').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAnxious });
@@ -25,14 +27,11 @@ function getPatientName(pt) {
 // display the patient name gender and dob in the index page
 function displayPatient(pt) {
   document.getElementById('patient_name').innerHTML = getPatientName(pt);
-  document.getElementById('gender').innerHTML = pt.gender;
-  document.getElementById('dob').innerHTML = pt.birthDate;
 }
 
 // Gets the BDRS questionnaire reference
 async function checkQuestionnaire(client) {
-    let dquest = defaultQuestionnaire()
-    let result = await getQuestionnaire(client, dquest);
+    let result = await getQuestionnaire(client);
     if (result.total > 0) {
         return result.entry[0].resource;
     }
@@ -40,8 +39,8 @@ async function checkQuestionnaire(client) {
     return result;
 }
 
-function getQuestionnaire(client, dquest) {
-    let query = "Questionnaire?name=" + dquest.name;
+function getQuestionnaire(client) {
+    let query = "Questionnaire?name=" + qName();
     return client.request(query);
 }
 
@@ -53,13 +52,17 @@ function tally(items) {
     return sum;
 }
 
-function getLastQuestionnaireResponse(client, dquest) {
-    getQuestionnaire(client, dquest).then((quest) => {
+function getQuestionnaireResponses(client) {
+    const count = "1000";
+
+    getQuestionnaire(client).then((quest) => {
         if (quest.total > 0) {
             let id = quest.entry[0].resource.id;
-            client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=100").then((bundle) => {
+            client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
                 console.log(bundle);
-                document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
+                if (bundle.total > 0) {
+                    // document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
+                }
             });
         } else {
             console.log("Could not find questionnaire");
@@ -67,8 +70,9 @@ function getLastQuestionnaireResponse(client, dquest) {
     });
 }
 
-function addQuestionnaireResponse() {
+function _addResponseBody(client) {
     let date = new Date();
+
     //YYYY-MM-DDThh:mm:ss+zz:zz
     let time = date.getFullYear() + "-"
         + (date.getMonth() + 1).toString().padStart(2, '0') + "-"
@@ -81,7 +85,7 @@ function addQuestionnaireResponse() {
 
     console.log("starting write");
     let completed = true;
-    getQuestionnaire().then((result) => {
+    getQuestionnaire(client).then((result) => {
         console.log(result);
         quest = result.entry[0].resource.id;
 
@@ -142,39 +146,47 @@ function addQuestionnaireResponse() {
     });
 }
 
-///// Begin execution
-    barratings();
-    let current_response = {};
-// LOCAL
-//once fhir client is authorized then the following functions can be executed
-//     const client = new FHIR.client({
-//         serverUrl: "https://r4.smarthealthit.org",
-//         tokenResponse: {
-//             patient: "5214a564-9117-4ffc-a88c-25f90239240b"
-//         }
-//     });
-// !LOCAL
+function addQuestionnaireResponse() {
+    if (LOCAL) {
+        Promise.resolve(new FHIR.client({
+            serverUrl: "https://r4.smarthealthit.org",
+            tokenResponse: {
+                patient: "5214a564-9117-4ffc-a88c-25f90239240b"
+            }
+        })).then((client) => {
+            _addResponseBody(client)
+        });
+    } else {
+        FHIR.oauth2.ready().then((client) => { _addResponseBody(client) });
+    }
+}
 
-// REMOTE
-FHIR.oauth2.ready().then((client) => {
-// !REMOTE
-
+function _setupBody(client) {
 // get patient object and then display its demographics info in the banner
-    client.request(`Patient/${client.patient.id}`).then(
-        function (patient) {
-            displayPatient(patient);
-        }
-    );
-    getLastQuestionnaireResponse(client, displayPatient(defaultQuestionnaire()));
+    client.request(`Patient/${client.patient.id}`).then((patient) => {
+        displayPatient(patient);
+    });
+
     checkQuestionnaire(client).then((result) => {
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
     });
+}
 
+///// Begin execution
+    barratings();
+    let current_response = {};
 
-    //event listener when the add button is clicked to call the function that will add the note to the weight observation
-    // document.getElementById('add').addEventListener('click', addWeightAnnotation);
-
-//REMOTE
-}).catch(console.error);
-//REMOTE
-
+    if (LOCAL) {
+        Promise.resolve(new FHIR.client({
+            serverUrl: "https://r4.smarthealthit.org",
+            tokenResponse: {
+                patient: "5214a564-9117-4ffc-a88c-25f90239240b"
+            }
+        })).then((client) => {
+            _setupBody(client);
+        });
+    } else {
+        FHIR.oauth2.ready().then((client) => {
+            _setupBody(client)
+        });
+    }

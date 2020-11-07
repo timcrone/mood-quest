@@ -1,5 +1,7 @@
 //adapted from the lab 3.2 materials
 
+const LOCAL=false
+
 // set up ratings
 function barratings() {
     $('#bdrs01').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionBDRS01 });
@@ -56,7 +58,8 @@ async function checkQuestionnaire(client) {
 }
 
 function getQuestionnaire(client) {
-    return client.request("Questionnaire?name=https://doi.org/10.1111/j.1399-5618.2007.00536.x");
+    let query = "Questionnaire?name=" + qName();
+    return client.request(query);
 }
 
 // Given a list of .item s, sum their answer[0].valueInteger s
@@ -67,13 +70,17 @@ function tally(items) {
     return sum;
 }
 
-function getLastQuestionnaireResponse(client) {
+function getQuestionnaireResponses(client) {
+    const count = "1000";
+
     getQuestionnaire(client).then((quest) => {
         if (quest.total > 0) {
             let id = quest.entry[0].resource.id;
-            client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=100").then((bundle) => {
+            client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
                 console.log(bundle);
-                // document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
+                if (bundle.total > 0) {
+                    // document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
+                }
             });
         } else {
             console.log("Could not find questionnaire");
@@ -81,8 +88,9 @@ function getLastQuestionnaireResponse(client) {
     });
 }
 
-function addQuestionnaireResponse() {
+function _addResponseBody(client) {
     let date = new Date();
+
     //YYYY-MM-DDThh:mm:ss+zz:zz
     let time = date.getFullYear() + "-"
         + (date.getMonth() + 1).toString().padStart(2, '0') + "-"
@@ -95,7 +103,7 @@ function addQuestionnaireResponse() {
 
     console.log("starting write");
     let completed = true;
-    getQuestionnaire().then((result) => {
+    getQuestionnaire(client).then((result) => {
         console.log(result);
         quest = result.entry[0].resource.id;
 
@@ -154,6 +162,21 @@ function addQuestionnaireResponse() {
             });
         }
     });
+}
+
+function addQuestionnaireResponse() {
+    if (LOCAL) {
+        Promise.resolve(new FHIR.client({
+            serverUrl: "https://r4.smarthealthit.org",
+            tokenResponse: {
+                patient: "5214a564-9117-4ffc-a88c-25f90239240b"
+            }
+        })).then((client) => {
+            _addResponseBody(client)
+        });
+    } else {
+        FHIR.oauth2.ready().then((client) => { _addResponseBody(client) });
+    }
 }
 
 function displaySurvey() {
@@ -236,36 +259,35 @@ function buildChart(client) {
     });
 }
 
+function _setupBody(client) {
+// get patient object and then display its demographics info in the banner
+    client.request(`Patient/${client.patient.id}`).then((patient) => {
+        displayPatient(patient);
+    });
+
+    checkQuestionnaire(client).then((result) => {
+        document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
+    });
+
+    buildChart(client);
+    document.getElementById('chartButton').addEventListener('click', displayChart);
+}
+
 ///// Begin execution
     barratings();
     let current_response = {};
 
-// LOCAL
-//once fhir client is authorized then the following functions can be executed
-    Promise.resolve(new FHIR.client({
-        serverUrl: "https://r4.smarthealthit.org",
-        tokenResponse: {
-            patient: "5214a564-9117-4ffc-a88c-25f90239240b"
-        }
-    })).then((client) => {
-// !LOCAL
-
-// REMOTE
-// FHIR.oauth2.ready().then((client) => {
-// !REMOTE
-
-// get patient object and then display its demographics info in the banner
-    client.request(`Patient/${client.patient.id}`).then(
-        function (patient) {
-            displayPatient(patient);
-        }
-    );
-    checkQuestionnaire(client).then((result) => {
-        document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
-    });
-    buildChart(client);
-    document.getElementById('chartButton').addEventListener('click', displayChart);
-//REMOTE
-}).catch(console.error);
-//REMOTE
-
+    if (LOCAL) {
+        Promise.resolve(new FHIR.client({
+            serverUrl: "https://r4.smarthealthit.org",
+            tokenResponse: {
+                patient: "5214a564-9117-4ffc-a88c-25f90239240b"
+            }
+        })).then((client) => {
+            _setupBody(client);
+        });
+    } else {
+        FHIR.oauth2.ready().then((client) => {
+            _setupBody(client)
+        });
+    }

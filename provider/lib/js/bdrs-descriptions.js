@@ -200,13 +200,17 @@ function setDescriptionBDRS20(val) { let id="bdrs20"; let result = "undefined"; 
     case "3": result = "marked agitation, e.g., near continuous pacing or wringing hands"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
+function qName() {
+    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:version:1.0";
+}
+
 function defaultQuestionnaire() {
     let qaire = {
         resourceType: "Questionnaire",
         status: "active",
         title: "Bipolar Depression Rating Scale (BDRS)",
         date: "2007",
-        name: "https://doi.org/10.1111/j.1399-5618.2007.00536.x:version:1.0",
+        name: qName(),
         code: [ {
             system: "http://snomed.info/sct",
             code: "416767005"

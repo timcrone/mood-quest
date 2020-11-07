@@ -84,13 +84,17 @@ function setDescriptionMoodEnergetic(val) { let id="mood_energetic"; let result 
     case "3": result = "marked reduction in social interaction or avoidance of almost all forms of social contact, e.g., refuses to answer the phone or see friends or family"; break;
     default: result = "undefined"; } setDescription(id, result); }
 
+function qName() {
+    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:version:1.0";
+}
+
 function defaultQuestionnaire() {
     let qaire = {
         resourceType: "Questionnaire",
         status: "active",
         title: "Bipolar Depression Rating Scale (BDRS)",
         date: "2007",
-        name: "https://doi.org/10.1111/j.1399-5618.2007.00536.x",
+        name: qName(),
         code: [ {
             system: "http://snomed.info/sct",
             code: "416767005"
