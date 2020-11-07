@@ -1,6 +1,6 @@
 //adapted from the lab 3.2 materials
 
-const LOCAL=false
+const LOCAL=true
 
 // set up ratings
 function barratings() {
@@ -43,7 +43,6 @@ function getPatientName(pt) {
 // display the patient name gender and dob in the index page
 function displayPatient(pt) {
   document.getElementById('patient_name').innerHTML = getPatientName(pt);
-  document.getElementById('gender').innerHTML = pt.gender;
   document.getElementById('dob').innerHTML = pt.birthDate;
 }
 
