@@ -3,8 +3,6 @@
 
 <head>
   <link rel="stylesheet" href="lib/css/styles.css">
-  <link rel="stylesheet" href="lib/css/normalize.min.css">
-  <link rel="stylesheet" href="lib/css/main.css">
   <link rel="stylesheet" href="lib/css/bars-square.css">
   <script src="lib/js/jquery-3.5.1.js"></script>
   <script src="lib/js/jquery.barrating.js"></script>
@@ -19,87 +17,84 @@
       </div>
       <div>
         Progress:
-        <span class="banner-value" id="current_prog">0</span>%
-        <button class="submit" id="bdrs_save" style="background: #2b4865">Save</button>
+        <span class="banner-value" id="current_mood">0</span>%
+        <button class="submit" id="mood_save" style="background: #2b4865">Save</button>
       </div>
     </header>
 
     <main class="main">
-      <section class="main-overview"> <!-- BDRS 01 -->
+      <section class="main-overview">
         <div class="small-card">
           Anxious<br>
-          <span class="desc-text">gloom, sadness, pessimism, hopelessness, and helplessness</span>
+          <span class="desc-text">My mood is characterized by anticipation of impending danger, catastrophe, or misfortune</span>
         </div>
         <div class="small-card">
-          <select id="mood_anxious" autocomplete="off"><option value=""></option><option id="bdrs01-1" value="1">1</option><option id="bdrs01-2" value="2">2</option><option id="bdrs01-3" value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood01" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_anxious-text">unselected</span>
+          <span class="desc-text" id="mood01-text">unselected</span>
         </div>
       </section>
-      <section class="main-overview"> <!-- BDRS 02 -->
+      <section class="main-overview">
         <div class="small-card">
           Elated<br>
-          <span class="desc-text">Insomnia (reduction in total sleep time); Hypersomnia (increase in total sleep time,inclusive of daytime sleep)</li></ul></span>
+          <span class="desc-text">My mood is characterized by heightened joy, exaggerated optimism, or restless excitement</span>
         </div>
         <div class="small-card">
-          <select id="mood_elated" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood02" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_elated-text">unselected</span>
+          <span class="desc-text" id="mood02-text">unselected</span>
         </div>
       </section>
-      <section class="main-overview"> <!-- BDRS 03 -->
+      <section class="main-overview">
         <div class="small-card">
           Bad<br>
-          <span class="desc-text">Score one: Loss of appetite, Increase in appetite</span>
+          <span class="desc-text">My mood is characterized by general negativity, unhappiness, dissatisfaction or guilt</span>
         </div>
         <div class="small-card">
-          <select id="mood_bad" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood03" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_bad-text">unselected</span>
+          <span class="desc-text" id="mood03-text">unselected</span>
         </div>
       </section>
-      <section class="main-overview"> <!-- BDRS 03 -->
+      <section class="main-overview">
         <div class="small-card">
           Angry<br>
-          <span class="desc-text">Score one: Loss of appetite, Increase in appetite</span>
+          <span class="desc-text">My mood is characterized by tension and hostility arising from frustration, real or imagined injury by another, or perceived injustice</span>
         </div>
         <div class="small-card">
-          <select id="mood_angry" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood04" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_angry-text">unselected</span>
+          <span class="desc-text" id="mood04-text">unselected</span>
         </div>
       </section>
-      <section class="main-overview"> <!-- BDRS 03 -->
+      <section class="main-overview">
         <div class="small-card">
           Irritable<br>
-          <span class="desc-text">Score one: Loss of appetite, Increase in appetite</span>
+          <span class="desc-text">My mood is characterized by easily provoked anger, annoyance, or impatience</span>
         </div>
         <div class="small-card">
-          <select id="mood_irritable" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood05" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_irritable-text">unselected</span>
+          <span class="desc-text" id="mood05-text">unselected</span>
         </div>
       </section>
-      <section class="main-overview"> <!-- BDRS 03 -->
+      <section class="main-overview">
         <div class="small-card">
           Energetic<br>
-          <span class="desc-text">Score one: Loss of appetite, Increase in appetite</span>
+          <span class="desc-text">My mood is characterized by energy, activity, or vitality</span>
         </div>
         <div class="small-card">
-          <select id="mood_energetic" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
+          <select id="mood06" autocomplete="off"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>
           <br>
-          <span class="desc-text" id="mood_energetic-text">unselected</span>
+          <span class="desc-text" id="mood06-text">unselected</span>
         </div>
       </section>
     </main>
   </div>
 
   <script src='./lib/js/fhir-client.js'></script>
-  <script src="./lib/js/bdrs-descriptions.js"></script>
-  <!-- --><script src="./lib/js/get-data.js"></script><!-- -->
-
-  <!-- uncomment below script and comment above script to switch for easy local testing -->
-  <!-- --<script src="./lib/js/get-data-test.js"></script>!-- -->
+  <script src="./lib/js/survey-descriptions.js"></script>
+  <script src="./lib/js/get-data.js"></script>
 </body>
 
 </html>

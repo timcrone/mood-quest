@@ -4,12 +4,12 @@ const LOCAL=true
 
 // set up ratings
 function barratings() {
-    $('#mood_anxious').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAnxious });
-    $('#mood_elated').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodElated });
-    $('#mood_bad').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodBad });
-    $('#mood_angry').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAngry });
-    $('#mood_irritable').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodIrritable });
-    $('#mood_energetic').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodEnergetic });
+    $('#mood01').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAnxious });
+    $('#mood02').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodElated });
+    $('#mood03').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodBad });
+    $('#mood04').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodAngry });
+    $('#mood05').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodIrritable });
+    $('#mood06').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionMoodEnergetic });
 }
 
 // helper function to process fhir resource to get the patient name.
@@ -86,23 +86,14 @@ function _addResponseBody(client) {
     console.log("starting write");
     let completed = true;
     getQuestionnaire(client).then((result) => {
-        console.log(result);
+        // console.log(result);
         quest = result.entry[0].resource.id;
 
         let items = [];
         let val = 0;
-        for (let i = 1; i < 21; i++) {
+        for (let i = 1; i < 7; i++) {
             let lid = i;
             switch (i) {
-                case 2:
-                case 3:
-                    val = getValue("0" + i.toString() + "a");
-                    lid = i.toString() + "a";
-                    if (isNaN(val)) {
-                        val = getValue("0" + i.toString() + "b");
-                        lid = i.toString() + "b";
-                    }
-                    break;
                 default:
                     val = getValue(i);
                     lid = i.toString();
@@ -168,7 +159,7 @@ function _setupBody(client) {
     });
 
     checkQuestionnaire(client).then((result) => {
-        document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
+        document.getElementById('mood_save').addEventListener('click', addQuestionnaireResponse);
     });
 }
 
