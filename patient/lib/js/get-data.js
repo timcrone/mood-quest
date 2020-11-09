@@ -29,14 +29,14 @@ function displayPatient(pt) {
   document.getElementById('patient_name').innerHTML = getPatientName(pt);
 }
 
-// Gets the BDRS questionnaire reference
+// Gets the BDRS questionnaire reference; returns the FHIR ID for the questionnaire
 async function checkQuestionnaire(client) {
     let result = await getQuestionnaire(client);
     if (result.total > 0) {
-        return result.entry[0].resource;
+        return result.entry[0].resource.id;
     }
     result = await client.create(defaultQuestionnaire());
-    return result;
+    return result.entry[0].resource.id;
 }
 
 function getQuestionnaire(client) {
@@ -85,10 +85,7 @@ function _addResponseBody(client) {
 
     console.log("starting write");
     let completed = true;
-    getQuestionnaire(client).then((result) => {
-        // console.log(result);
-        quest = result.entry[0].resource.id;
-
+    checkQuestionnaire(client).then((quest) => {
         let items = [];
         let val = 0;
         for (let i = 1; i < 7; i++) {
