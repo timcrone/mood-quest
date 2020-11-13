@@ -11,7 +11,8 @@
     "@types/node": "^14.11.10",
     "chart.js": "^2.9.3",
     "core.js": "^0.4.2",
-    "fhirclient": "^2.3.10"
+    "fhirclient": "^2.3.10",
+    "mathjs": "^8.0.1"
   },
   "devDependencies": {},
   "scripts": {
