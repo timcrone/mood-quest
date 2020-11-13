@@ -30,11 +30,47 @@
 //   - Energetic: 50%: increased speech is restricted
 
 // https://stackoverflow.com/questions/22619719/javascript-generate-random-numbers-with-fixed-mean-and-standard-deviation
-function generateValues(count, mean, stdev) {
-    
+// generateValues generates a list of values that have characteristics such that the mean and stdev are about right.
+// Pass mean = 0 and stdev = 0 to just get a normal distribution.
+// min / max define the outside scope of the resulting list
+// maxdelta defines the absolute maximum amount of change between successive steps during the generation of
+//   the normal distribution.
+function generateMoodValues(count, mean, stdev, min, max, maxdelta) {
+    let nums = [];
+    let fnums = [];
+    let redo = true;
+    for (let _count=0; _count < count; _count++) {
+        redo = true;
+        while (redo) {
+            nums[_count] = math.random([min, max]);
+            if (_count === 0) {
+                redo = false;
+            } else if (math.abs(nums[_count] - nums[_count - 1]) < maxdelta) {
+                redo = false;
+            }
+        }
+    }
+    if (mean === 0 && stdev === 0) {
+        return nums
+    }
+    console.log(nums);
+    let cur_std = math.std(nums);
+    console.log(cur_std);
+    let cur_avg = math.mean(nums);
+    console.log(cur_avg);
+    for (let _count=0; _count < count; _count++) {
+        fnums[_count] = math.round(stdev * (nums[_count] - cur_avg) / cur_std + mean);
+        if (fnums[_count] > max) {
+            fnums[_count] = max;
+        } else if (fnums[_count] < min) {
+            fnums[_count] = min;
+        }
+    }
+    console.log(fnums);
+    return fnums;
 }
 
-function createMoodData(prior) {
+function createMoodData() {
     let result = {
         anxiety: 0,
         elated: 0,
@@ -43,7 +79,10 @@ function createMoodData(prior) {
         irritable: 0,
         energetic: 0
     }
-    if (typeof prior == 'undefined') {
+    let _anx = generateMoodValues(730, 0, 0, 1, 7, 2);
+    console.log(_anx);
+}
 
-    }
+function createHistory() {
+    createMoodData()
 }

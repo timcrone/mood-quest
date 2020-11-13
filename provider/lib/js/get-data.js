@@ -265,6 +265,7 @@ function _setupBody(client) {
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
     });
 
+    document.getElementById('generateButton').addEventListener('click', createHistory);
     buildChart(client);
     document.getElementById('chartButton').addEventListener('click', displayChart);
 }
