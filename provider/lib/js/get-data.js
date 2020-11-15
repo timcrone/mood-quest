@@ -1,7 +1,5 @@
 //adapted from the lab 3.2 materials
 
-const LOCAL=true
-
 // set up ratings
 function barratings() {
     $('#bdrs01').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionBDRS01 });
@@ -28,20 +26,20 @@ function barratings() {
     $('#bdrs20').barrating('show', { theme: 'bars-square', showValues: true, showSelectedRating: false, onSelect: setDescriptionBDRS20 });
 }
 
-// helper function to process fhir resource to get the patient name.
-function getPatientName(pt) {
-  if (pt.name) {
-    let names = pt.name.map(function(name) {
-      return name.given.join(" ") + " " + name.family;
-    });
-    return names.join(" / ")
-  } else {
-    return "anonymous";
-  }
-}
-
+// // helper function to process fhir resource to get the patient name.
+// function getPatientName(pt) {
+//   if (pt.name) {
+//     let names = pt.name.map(function(name) {
+//       return name.given.join(" ") + " " + name.family;
+//     });
+//     return names.join(" / ")
+//   } else {
+//     return "anonymous";
+//   }
+// }
+//
 // display the patient name gender and dob in the index page
-function displayPatient(pt) {
+function displayPatientAndDOB(pt) {
   document.getElementById('patient_name').innerHTML = getPatientName(pt);
   document.getElementById('dob').innerHTML = pt.birthDate;
 }
@@ -53,6 +51,7 @@ async function checkQuestionnaire(client) {
         return result.entry[0].resource.id;
     }
     result = await client.create(defaultQuestionnaire());
+    console.log(result);
     return result.entry[0].resource.id;
 }
 
@@ -258,7 +257,7 @@ function buildChart(client) {
 function _setupBody(client) {
 // get patient object and then display its demographics info in the banner
     client.request(`Patient/${client.patient.id}`).then((patient) => {
-        displayPatient(patient);
+        displayPatientAndDOB(patient);
     });
 
     checkQuestionnaire(client).then((result) => {
@@ -270,21 +269,3 @@ function _setupBody(client) {
     document.getElementById('chartButton').addEventListener('click', displayChart);
 }
 
-///// Begin execution
-    barratings();
-    let current_response = {};
-
-    if (LOCAL) {
-        Promise.resolve(new FHIR.client({
-            serverUrl: "https://r4.smarthealthit.org",
-            tokenResponse: {
-                patient: "5214a564-9117-4ffc-a88c-25f90239240b"
-            }
-        })).then((client) => {
-            _setupBody(client);
-        });
-    } else {
-        FHIR.oauth2.ready().then((client) => {
-            _setupBody(client)
-        });
-    }
