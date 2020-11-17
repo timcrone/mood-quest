@@ -33,8 +33,12 @@ async function checkMoodQuestionnaire(client) {
     if (result.total > 0) {
         return result.entry[0].resource.id;
     }
+    console.log("questionnaire search results:", result);
     result = await client.create(defaultMoodQuestionnaire());
-    console.log(result);
+    console.log("created new questionnaire: ", result);
+    if (result.id > 0) {
+        return result.id;
+    }
     return result.entry[0].resource.id;
 }
 
@@ -69,14 +73,9 @@ function getMoodQuestionnaireResponses(client) {
     });
 }
 
-function _addMoodResponseBody(client, data, date) {
-    console.log(date);
-    // console.log(moment().format());
+function _addMoodResponseBody(client, data, date, forceCreate) {
     if (isNaN(date)) {
         date = moment();
-    // } else {
-    //     date = new Date().setDate(date);
-    //     console.log(date.getDate);
     }
 
     //YYYY-MM-DDThh:mm:ss+zz:zz
@@ -90,7 +89,6 @@ function _addMoodResponseBody(client, data, date) {
     //     + (date.getTimezoneOffset() / 60).toString().padStart(2, '0') + ':'
     //     + (date.getTimezoneOffset() % 60).toString().padStart(2, '0');
 
-    console.log("starting mood response write");
     let completed = true;
     checkMoodQuestionnaire(client).then((quest) => {
         let items = [];
@@ -130,19 +128,20 @@ function _addMoodResponseBody(client, data, date) {
             item: items,
             questionnaire: "Questionnaire/" + quest
         }
-        if (typeof current_response.id == 'undefined') {
+        if (forceCreate || typeof current_mood_response.id == 'undefined') {
             client.create(response).then((result) => {
-                console.log("created: ", result);
-                current_response = result;
+                // console.log("created: ", result);
+                current_mood_response = result;
             });
         } else {
-            response.id = current_response.id;
-            current_response = client.update(response).then((result) => {
-                console.log("updated: ", result);
-                current_response = result;
+            response.id = current_mood_response.id;
+            current_mood_response = client.update(response).then((result) => {
+                // console.log("updated: ", result);
+                current_mood_response = result;
             });
         }
     });
+    try { document.getElementById('mood_save').style.background = '#000000'; } catch {}
 }
 
 function addMoodQuestionnaireResponseFromWeb() {

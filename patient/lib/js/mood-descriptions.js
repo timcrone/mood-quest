@@ -24,10 +24,10 @@ function setMoodTotalAndProgress(){
     document.getElementById('current_mood').innerHTML = total.toString();
     if (completed) {
         document.getElementById('current_mood').innerHTML = '100';
-        document.getElementById('mood_save').style.background = '#006400';
+        document.getElementById('mood_save').style.background = '#00FF00';
     } else {
         document.getElementById('current_mood').innerHTML = Math.round((count / qlength) * 100).toString();
-        document.getElementById('mood_save').style.background = '#2b4865';
+        document.getElementById('mood_save').style.background = '#F7FE2E';
     }
 }
 

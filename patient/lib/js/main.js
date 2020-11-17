@@ -3,7 +3,7 @@
 const LOCAL=true
 
 barratingsMood();
-let current_response = {};
+let current_mood_response = {};
 
 if (LOCAL) {
     Promise.resolve(new FHIR.client({

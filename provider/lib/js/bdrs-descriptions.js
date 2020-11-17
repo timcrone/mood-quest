@@ -30,10 +30,10 @@ function setTotalAndProgress(){
     document.getElementById('current_bdrs').innerHTML = total.toString();
     if (completed) {
         document.getElementById('current_prog').innerHTML = '100';
-        document.getElementById('bdrs_save').style.background = '#006400';
+        document.getElementById('bdrs_save').style.background = '#00FF00';
     } else {
         document.getElementById('current_prog').innerHTML = Math.round((count / qlength) * 100).toString();
-        document.getElementById('bdrs_save').style.background = '#2b4865';
+        document.getElementById('bdrs_save').style.background = '#F7FE2E';
     }
 }
 
@@ -201,7 +201,7 @@ function setDescriptionBDRS20(val) { let id="bdrs20"; let result = "undefined"; 
     default: result = "undefined"; } setDescription(id, result); }
 
 function qName() {
-    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:v1.0";
+    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:v1.0.0";
 }
 
 function defaultQuestionnaire() {
@@ -222,23 +222,13 @@ function defaultQuestionnaire() {
                 type: "integer"
             },
             {
-                linkId: "2a",
-                text: "Sleep disturbance: Insomnia",
+                linkId: "2",
+                text: "Sleep disturbance",
                 type: "integer"
             },
             {
-                linkId: "2b",
-                text: "Sleep disturbance: Hypersomnia",
-                type: "integer"
-            },
-            {
-                linkId: "3a",
-                text: "Appetite disturbance: Loss of appetite",
-                type: "integer"
-            },
-            {
-                linkId: "3b",
-                text: "Appetite disturbance: Increase in appetite",
+                linkId: "3",
+                text: "Appetite disturbance",
                 type: "integer"
             },
             {

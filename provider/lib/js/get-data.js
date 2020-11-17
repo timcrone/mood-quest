@@ -50,8 +50,12 @@ async function checkQuestionnaire(client) {
     if (result.total > 0) {
         return result.entry[0].resource.id;
     }
+    console.log("questionnaire search results:", result);
     result = await client.create(defaultQuestionnaire());
-    console.log(result);
+    console.log("created new questionnaire: ", result);
+    if (result.id > 0) {
+        return result.id;
+    }
     return result.entry[0].resource.id;
 }
 
@@ -86,39 +90,48 @@ function getQuestionnaireResponses(client) {
     });
 }
 
-function _addResponseBody(client) {
-    let date = new Date();
+function _addResponseBody(client, data, date, forceCreate) {
+    if (isNaN(date)) {
+        date = moment();
+    }
 
     //YYYY-MM-DDThh:mm:ss+zz:zz
-    let time = date.getFullYear() + "-"
-        + (date.getMonth() + 1).toString().padStart(2, '0') + "-"
-        + date.getDate().toString().padStart(2, '0') + "T"
-        + date.getHours().toString().padStart(2, '0') + ":"
-        + date.getMinutes().toString().padStart(2, '0') + ":"
-        + date.getSeconds().toString().padStart(2, '0') + '+'
-        + (date.getTimezoneOffset() / 60).toString().padStart(2, '0') + ':'
-        + (date.getTimezoneOffset() % 60).toString().padStart(2, '0');
+    let time = date.format();
+    // let time = date.getFullYear() + "-"
+    //     + (date.getMonth() + 1).toString().padStart(2, '0') + "-"
+    //     + date.getDate().toString().padStart(2, '0') + "T"
+    //     + date.getHours().toString().padStart(2, '0') + ":"
+    //     + date.getMinutes().toString().padStart(2, '0') + ":"
+    //     + date.getSeconds().toString().padStart(2, '0') + '+'
+    //     + (date.getTimezoneOffset() / 60).toString().padStart(2, '0') + ':'
+    //     + (date.getTimezoneOffset() % 60).toString().padStart(2, '0');
 
-    console.log("starting write");
     let completed = true;
     checkQuestionnaire(client).then((quest) => {
         let items = [];
         let val = 0;
         for (let i = 1; i < 21; i++) {
-            let lid = i;
+            let lid = i.toString();
             switch (i) {
                 case 2:
                 case 3:
-                    val = getValue("0" + i.toString() + "a");
-                    lid = i.toString() + "a";
-                    if (isNaN(val)) {
-                        val = getValue("0" + i.toString() + "b");
-                        lid = i.toString() + "b";
+                    if (data === false) {
+                        val = getValue("0" + i.toString() + "a");
+                        // lid = i.toString() + "a";
+                        if (isNaN(val)) {
+                            val = getValue("0" + i.toString() + "b");
+                            // lid = i.toString() + "b";
+                        }
+                    } else {
+                        val = data[i - 1];
                     }
                     break;
                 default:
-                    val = getValue(i);
-                    lid = i.toString();
+                    if (data === false) {
+                        val = getValue(i);
+                    } else {
+                        val = data[i - 1];
+                    }
             }
             if (isNaN(val)) {
                 completed = false;
@@ -144,7 +157,7 @@ function _addResponseBody(client) {
             item: items,
             questionnaire: "Questionnaire/" + quest
         }
-        if (typeof current_response.id == 'undefined') {
+        if (forceCreate || typeof current_response.id == 'undefined') {
             client.create(response).then((result) => {
                 console.log("created: ", result);
                 current_response = result;
@@ -157,6 +170,7 @@ function _addResponseBody(client) {
             });
         }
     });
+    document.getElementById('bdrs_save').style.background = '#000000';
 }
 
 function addQuestionnaireResponse() {
@@ -167,10 +181,10 @@ function addQuestionnaireResponse() {
                 patient: "5214a564-9117-4ffc-a88c-25f90239240b"
             }
         })).then((client) => {
-            _addResponseBody(client)
+            _addResponseBody(client, false)
         });
     } else {
-        FHIR.oauth2.ready().then((client) => { _addResponseBody(client) });
+        FHIR.oauth2.ready().then((client) => { _addResponseBody(client, false) });
     }
 }
 
