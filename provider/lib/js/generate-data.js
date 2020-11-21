@@ -53,12 +53,12 @@ function generateRandValues(count, mean, stdev, min, max, maxdelta) {
 
 function createMoodData(count) {
     let values = {
-        angry: generateRandValues(count, 0, 0, 1, 7, 2),
-        anxiety: generateRandValues(count, 0, 0, 1, 7, 2),
-        elated: generateRandValues(count, 0, 0, 1, 7, 2),
-        energetic: generateRandValues(count, 0, 0, 1, 7, 2),
-        irritable: generateRandValues(count, 0, 0, 1, 7, 2),
-        sad: generateRandValues(count, 0, 0, 1, 7, 2)
+        angry: generateRandValues(count, 2, 2, 1, 7, 1),
+        anxiety: generateRandValues(count, 2, 2, 1, 7, 1),
+        elated: generateRandValues(count, 2, 2, 1, 7, 1),
+        energetic: generateRandValues(count, 2, 2, 1, 7, 1),
+        irritable: generateRandValues(count, 2, 2, 1, 7, 1),
+        sad: generateRandValues(count, 2, 2, 1, 7, 1)
     }
     return values;
 }
@@ -184,8 +184,6 @@ function generateEverything(client) {
 }
 
 function createHistory() {
-    console.log("Generating mood data");
-    createMoodData();
     if (LOCAL) {
         Promise.resolve(new FHIR.client({
             serverUrl: "https://r4.smarthealthit.org",

@@ -58,9 +58,10 @@ async function checkQuestionnaire(client) {
 function getQuestionnaire(client) {
     let query = {
         url: "Questionnaire?name=" + qName(),
-        headers: {
-            "Cache-Control": "no-cache"
-        }
+        cache: "reload"
+        // headers: {
+        //     "Cache-Control": "no-cache"
+        // }
     };
     return client.request(query);
 }
@@ -191,13 +192,13 @@ function _addResponseBody(client, data, date, forceCreate) {
         }
         if (forceCreate || typeof current_response.id == 'undefined') {
             client.create(response).then((result) => {
-                console.log("created: ", result);
+                // console.log("created: ", result);
                 current_response = result;
             });
         } else {
             response.id = current_response.id;
             current_response = client.update(response).then((result) => {
-                console.log("updated: ", result);
+                // console.log("updated: ", result);
                 current_response = result;
             });
         }

@@ -31,7 +31,7 @@ function displayPatient(pt) {
 async function checkMoodQuestionnaire(client) {
     let result = await getMoodQuestionnaire(client);
     try { return result.entry[0].resource.id; } catch {}
-    console.log("questionnaire search results:", result);
+    console.log("mood questionnaire search results:", result);
     result = await client.create(defaultMoodQuestionnaire());
     console.log("created new mood questionnaire: ", result);
     try { return result.entry[0].resource.id; } catch {}
@@ -41,11 +41,10 @@ async function checkMoodQuestionnaire(client) {
 function getMoodQuestionnaire(client) {
     let query = {
         url: "Questionnaire?name=" + qMoodName(),
-        headers: {
-            "Cache-Control": "no-cache"
-        }
+        cache: "reload"
     };
-    return client.request(query);
+    let result = client.request(query);
+    return result;
 }
 
 // Given a list of .item s, sum their answer[0].valueInteger s
@@ -61,7 +60,7 @@ function getMoodQuestionnaireResponses(client) {
 
     return new Promise((resolve, reject) => {
         getMoodQuestionnaire(client).then((quest) => {
-            if (quest.total > 0) {
+            try {
                 let id = quest.entry[0].resource.id;
                 client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
                     let retdata = {
@@ -88,7 +87,7 @@ function getMoodQuestionnaireResponses(client) {
                     });
                     resolve(retdata);
                 });
-            } else {
+            } catch {
                 console.log("Could not find questionnaire");
                 resolve({
                     Anxious: [],
