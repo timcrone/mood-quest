@@ -84,21 +84,20 @@ function generateMoodHistory(client) {
 
 function createBDRSData(count) {
     let values = []
+    // Means and standard deviations from the original paper
     let m_std = [[1.65, 0.9], [1.48, 1.04], [1.16, 1.04], [1.5, 1.01], [1.48, 0.86],
                  [1.6, 1.06], [1.71, 0.88], [1.54, 0.9], [1.43, 0.95], [1.33, 0.98],
                  [1.39, 1.09], [1.38, 1.11], [0.9, 1.09], [1.25, 0.96], [0.45, 0.79],
                  [0.93, 0.84], [0.89, 0.91], [0.17, 0.51], [0.3, 0.69], [0.28, 0.63]]
-    for (let _count = 0; _count < count; _count++) {
-        values[_count] = []
-        for (let _quest = 0; _quest < m_std.length; _quest++) {
-            values[_count].push(generateRandValues(count, m_std[_quest][0], m_std[_quest][1], 0, 3, 4));
-        }
+    values = []
+    for (let _quest = 0; _quest < m_std.length; _quest++) {
+        values.push(generateRandValues(count, m_std[_quest][0], m_std[_quest][1], 0, 3, 4));
     }
     return values;
 }
 
 function _restrict(odds, baseValue, moodValue, negative) {
-    let restricted = (moodValue[0] - 1) / 2
+    let restricted = Math.trunc((moodValue - 1) / 2);
     if (Math.random() < odds) {
         if (negative) {
             return 3 - restricted
@@ -166,9 +165,8 @@ function generateBDRSHistory(client, moodData) {
             let _moodCount = _bdrsCount * 14;
             let bd = [];
             for (let _bc = 0; _bc < data.length; _bc++) {
-                bd.push(data[_bdrsCount][_bc]);
+                bd.push(data[_bc][_bdrsCount]);
             }
-            console.log(_bdrsCount, _moodCount, bd);
             if (moodData["angry"][_moodCount] !== 0) {
                 //   - If a mood report is on the day of the BDRS report it is used as the basis
                 let md = [moodData["anxiety"][_moodCount], moodData["elated"][_moodCount], moodData["sad"][_moodCount],

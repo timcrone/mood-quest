@@ -30,20 +30,21 @@ function displayPatient(pt) {
 // Gets the mood questionnaire reference; returns the FHIR ID for the questionnaire
 async function checkMoodQuestionnaire(client) {
     let result = await getMoodQuestionnaire(client);
-    if (result.total > 0) {
-        return result.entry[0].resource.id;
-    }
+    try { return result.entry[0].resource.id; } catch {}
     console.log("questionnaire search results:", result);
     result = await client.create(defaultMoodQuestionnaire());
-    console.log("created new questionnaire: ", result);
-    if (result.id > 0) {
-        return result.id;
-    }
-    return result.entry[0].resource.id;
+    console.log("created new mood questionnaire: ", result);
+    try { return result.entry[0].resource.id; } catch {}
+    return result.id;
 }
 
 function getMoodQuestionnaire(client) {
-    let query = "Questionnaire?name=" + qMoodName();
+    let query = {
+        url: "Questionnaire?name=" + qMoodName(),
+        headers: {
+            "Cache-Control": "no-cache"
+        }
+    };
     return client.request(query);
 }
 
