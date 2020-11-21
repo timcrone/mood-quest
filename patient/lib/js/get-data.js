@@ -57,20 +57,51 @@ function tally(items) {
 }
 
 function getMoodQuestionnaireResponses(client) {
-    const count = "1000";
+    const count = "250";
 
-    getMoodQuestionnaire(client).then((quest) => {
-        if (quest.total > 0) {
-            let id = quest.entry[0].resource.id;
-            client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
-                console.log(bundle);
-                if (bundle.total > 0) {
-                    // document.getElementById('prior_bdrs').innerHTML = tally(bundle.entry[0].resource.item);
-                }
-            });
-        } else {
-            console.log("Could not find questionnaire");
-        }
+    return new Promise((resolve, reject) => {
+        getMoodQuestionnaire(client).then((quest) => {
+            if (quest.total > 0) {
+                let id = quest.entry[0].resource.id;
+                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
+                    let retdata = {
+                        Anxious: [],
+                        Elated: [],
+                        Sad: [],
+                        Angry: [],
+                        Irritable: [],
+                        Energetic: [],
+                        Date: [],
+                        FirstDate: moment()
+                    };
+                    bundle.entry.forEach((record) => {
+                        retdata.Anxious.unshift(record.resource.item[0].answer[0].valueInteger);
+                        retdata.Elated.unshift(record.resource.item[1].answer[0].valueInteger);
+                        retdata.Sad.unshift(record.resource.item[2].answer[0].valueInteger);
+                        retdata.Angry.unshift(record.resource.item[3].answer[0].valueInteger);
+                        retdata.Irritable.unshift(record.resource.item[4].answer[0].valueInteger);
+                        retdata.Energetic.unshift(record.resource.item[5].answer[0].valueInteger);
+                        retdata.Date.unshift(moment(record.resource.authored).format("YYYY-MM-DD"));
+                        if (moment(record.resource.authored) < retdata["FirstDate"]) {
+                            retdata["FirstDate"] = moment(record.resource.authored);
+                        }
+                    });
+                    resolve(retdata);
+                });
+            } else {
+                console.log("Could not find questionnaire");
+                resolve({
+                    Anxious: [],
+                    Elated: [],
+                    Sad: [],
+                    Angry: [],
+                    Irritable: [],
+                    Energetic: [],
+                    Date: [],
+                    FirstDate: moment()
+                });
+            }
+        });
     });
 }
 
