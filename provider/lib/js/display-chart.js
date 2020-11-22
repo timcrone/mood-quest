@@ -22,7 +22,6 @@ async function buildChart(client) {
     let mood_context = document.getElementById('mood-chart');
 
     getQuestionnaireResponses(client).then((bdrs_data) => {
-        console.log(bdrs_data);
         new Chart(bdrs_context, {
             type: 'line',
             data: {
@@ -62,7 +61,6 @@ async function buildChart(client) {
         });
     });
     getMoodQuestionnaireResponses(client).then((mood_data) => {
-        console.log(mood_data);
         new Chart(mood_context, {
             type: 'line',
             data: {
