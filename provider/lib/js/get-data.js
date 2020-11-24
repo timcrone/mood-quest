@@ -78,7 +78,7 @@ function getQuestionnaireResponses(client) {
     const count = "250";
 
     return new Promise((resolve, reject) => {
-        checktQuestionnaire(client).then((id) => {
+        checkQuestionnaire(client).then((id) => {
             // if (quest.total > 0) {
                 let pid = client.patient.id;
                 // let id = quest.entry[0].resource.id;
