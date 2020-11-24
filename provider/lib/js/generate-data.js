@@ -181,7 +181,7 @@ async function generateEverything(client) {
     let moodData = await generateMoodHistory(client);
     await generateBDRSHistory(client, moodData);
     document.getElementById('generateButton').removeEventListener('click', createHistory);
-    document.getElementById('generateButton').setAttribute('visibility', 'hidden');
+    document.getElementById('generateButton').style.display = "none";
 }
 
 function createHistory() {
