@@ -85,7 +85,7 @@ function getQuestionnaireResponses(client) {
                 let req = "QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count;
                 console.log(req);
                 client.request(req).then((bundle) => {
-                    let retdata = { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
+                      let retdata = { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
                         bdrs10: [{}], bdrs11: [{}], bdrs12: [{}], bdrs13: [{}], bdrs14: [{}], bdrs15: [{}], bdrs16: [{}], bdrs17: [{}], bdrs18: [{}], bdrs19: [{}],
                         bdrs20: [{}], FirstDate: moment() };
                     try {

@@ -257,7 +257,7 @@ async function buildChart(client) {
                         yAxes: [{
                             stacked: true,
                             ticks: {
-                                beginAtZero: true
+                                // beginAtZero: true
                             }
                         }]
                     }
