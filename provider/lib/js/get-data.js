@@ -187,8 +187,7 @@ function _addResponseBody(client, data, date, forceCreate) {
             resourceType: "QuestionnaireResponse",
             status: cur_status,
             subject: {
-                reference: "Patient/" + client.patient.id,
-                type: "Patient"
+                reference: "Patient/" + client.patient.id
             },
             authored: time,
             item: items,
