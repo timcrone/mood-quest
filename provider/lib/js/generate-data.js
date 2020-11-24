@@ -62,7 +62,7 @@ function createMoodData(count) {
     return values;
 }
 
-function generateMoodHistory(client) {
+async function generateMoodHistory(client) {
     let count = 730; // time window
     let prob = 0.70; // probability of getting a reading for a day
     let data = createMoodData(count);
@@ -155,7 +155,7 @@ function correlateValues(bdrs, mood) {
     return bdrs;
 }
 
-function generateBDRSHistory(client, moodData) {
+async function generateBDRSHistory(client, moodData) {
     let count = 52; // number of iterations
     let prob = 0.75; // probability
     let data = createBDRSData(count);
@@ -177,9 +177,11 @@ function generateBDRSHistory(client, moodData) {
     }
 }
 
-function generateEverything(client) {
-    let moodData = generateMoodHistory(client);
-    generateBDRSHistory(client, moodData);
+async function generateEverything(client) {
+    let moodData = await generateMoodHistory(client);
+    await generateBDRSHistory(client, moodData);
+    document.getElementById('generateButton').removeEventListener('click', createHistory);
+    document.getElementById('generateButton').setAttribute('visibility', 'hidden');
 }
 
 function createHistory() {
