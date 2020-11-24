@@ -40,7 +40,7 @@ async function checkMoodQuestionnaire(client) {
 
 function getMoodQuestionnaire(client) {
     let query = {
-        url: "Questionnaire?name=" + qMoodName(),
+        url: "Questionnaire?name=" + qMoodName() + "&_sort=-date",
         cache: "reload"
     };
     let result = client.request(query);

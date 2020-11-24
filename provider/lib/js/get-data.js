@@ -57,7 +57,7 @@ async function checkQuestionnaire(client) {
 
 function getQuestionnaire(client) {
     let query = {
-        url: "Questionnaire?name=" + qName(),
+        url: "Questionnaire?name=" + qName() + "&_sort=-date",
         cache: "reload"
         // headers: {
         //     "Cache-Control": "no-cache"
