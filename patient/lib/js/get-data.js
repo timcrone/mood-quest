@@ -63,7 +63,9 @@ function getMoodQuestionnaireResponses(client) {
             try {
                 let pid = client.patient.id;
                 let id = quest.entry[0].resource.id;
-                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count).then((bundle) => {
+                let req = "QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count;
+                console.log(req);
+                client.request(req).then((bundle) => {
                     let retdata = {
                         Anxious: [{}],
                         Elated: [{}],
