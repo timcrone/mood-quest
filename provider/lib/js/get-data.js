@@ -78,10 +78,10 @@ function getQuestionnaireResponses(client) {
     const count = "250";
 
     return new Promise((resolve, reject) => {
-        getQuestionnaire(client).then((quest) => {
-            if (quest.total > 0) {
+        checktQuestionnaire(client).then((id) => {
+            // if (quest.total > 0) {
                 let pid = client.patient.id;
-                let id = quest.entry[0].resource.id;
+                // let id = quest.entry[0].resource.id;
                 let req = "QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count;
                 console.log(req);
                 client.request(req).then((bundle) => {
@@ -178,12 +178,12 @@ function getQuestionnaireResponses(client) {
                     } catch(err) { console.log(err); }
                     resolve(retdata);
                 });
-            } else {
-                console.log("Could not find questionnaire");
-                resolve( { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
-                    bdrs10: [{}], bdrs11: [{}], bdrs12: [{}], bdrs13: [{}], bdrs14: [{}], bdrs15: [{}], bdrs16: [{}], bdrs17: [{}], bdrs18: [{}], bdrs19: [{}],
-                    bdrs20: [{}], FirstDate: moment() } );
-            }
+            // } else {
+            //     console.log("Could not find questionnaire");
+            //     resolve( { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
+            //         bdrs10: [{}], bdrs11: [{}], bdrs12: [{}], bdrs13: [{}], bdrs14: [{}], bdrs15: [{}], bdrs16: [{}], bdrs17: [{}], bdrs18: [{}], bdrs19: [{}],
+            //         bdrs20: [{}], FirstDate: moment() } );
+            // }
         });
     });
 }

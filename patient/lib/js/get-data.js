@@ -59,10 +59,10 @@ function getMoodQuestionnaireResponses(client) {
     const count = "250";
 
     return new Promise((resolve, reject) => {
-        getMoodQuestionnaire(client).then((quest) => {
-            try {
+        checkMoodQuestionnaire(client).then((id) => {
+            // try {
                 let pid = client.patient.id;
-                let id = quest.entry[0].resource.id;
+                // let id = quest.entry[0].resource.id;
                 let req = "QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count;
                 console.log(req);
                 client.request(req).then((bundle) => {
@@ -108,18 +108,18 @@ function getMoodQuestionnaireResponses(client) {
                     } catch(err) { console.log(err); }
                     resolve(retdata);
                 });
-            } catch {
-                console.log("Could not find questionnaire");
-                resolve({
-                    Anxious: [{}],
-                    Elated: [{}],
-                    Sad: [{}],
-                    Angry: [{}],
-                    Irritable: [{}],
-                    Energetic: [{}],
-                    FirstDate: moment()
-                });
-            }
+            // } catch {
+            //     console.log("Could not find questionnaire");
+            //     resolve({
+            //         Anxious: [{}],
+            //         Elated: [{}],
+            //         Sad: [{}],
+            //         Angry: [{}],
+            //         Irritable: [{}],
+            //         Energetic: [{}],
+            //         FirstDate: moment()
+            //     });
+            // }
         });
     });
 }
