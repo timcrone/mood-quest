@@ -258,6 +258,7 @@ async function buildChart(client) {
                             stacked: true,
                             ticks: {
                                 // beginAtZero: true
+                                min: 1
                             }
                         }]
                     }
