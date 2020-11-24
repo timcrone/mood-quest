@@ -186,7 +186,10 @@ function _addResponseBody(client, data, date, forceCreate) {
         let response = {
             resourceType: "QuestionnaireResponse",
             status: cur_status,
-            subject: "Patient/" + client.patient.id,
+            subject: {
+                reference: "Patient/" + client.patient.id,
+                type: "Patient"
+            },
             authored: time,
             item: items,
             questionnaire: "Questionnaire/" + quest
