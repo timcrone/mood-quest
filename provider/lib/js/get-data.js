@@ -173,7 +173,7 @@ function getQuestionnaireResponses(client) {
                                 retdata["FirstDate"] = moment(record.resource.authored);
                             }
                         });
-                    } catch {}
+                    } catch(err) { console.log(err); }
                     resolve(retdata);
                 });
             } else {
