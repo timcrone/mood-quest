@@ -73,17 +73,37 @@ function getMoodQuestionnaireResponses(client) {
                         Energetic: [{}],
                         FirstDate: moment()
                     };
-                    bundle.entry.forEach((record) => {
-                        retdata.Anxious.unshift({x: moment(record.resource.authored), y: record.resource.item[0].answer[0].valueInteger});
-                        retdata.Elated.unshift({x: moment(record.resource.authored), y: record.resource.item[1].answer[0].valueInteger});
-                        retdata.Sad.unshift({x: moment(record.resource.authored), y: record.resource.item[2].answer[0].valueInteger});
-                        retdata.Angry.unshift({x: moment(record.resource.authored), y: record.resource.item[3].answer[0].valueInteger});
-                        retdata.Irritable.unshift({x: moment(record.resource.authored), y: record.resource.item[4].answer[0].valueInteger});
-                        retdata.Energetic.unshift({x: moment(record.resource.authored), y: record.resource.item[5].answer[0].valueInteger});
-                        if (moment(record.resource.authored) < retdata["FirstDate"]) {
-                            retdata["FirstDate"] = moment(record.resource.authored);
-                        }
-                    });
+                    try {
+                        bundle.entry.forEach((record) => {
+                            retdata.Anxious.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[0].answer[0].valueInteger
+                            });
+                            retdata.Elated.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[1].answer[0].valueInteger
+                            });
+                            retdata.Sad.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[2].answer[0].valueInteger
+                            });
+                            retdata.Angry.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[3].answer[0].valueInteger
+                            });
+                            retdata.Irritable.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[4].answer[0].valueInteger
+                            });
+                            retdata.Energetic.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[5].answer[0].valueInteger
+                            });
+                            if (moment(record.resource.authored) < retdata["FirstDate"]) {
+                                retdata["FirstDate"] = moment(record.resource.authored);
+                            }
+                        });
+                    } catch {}
                     resolve(retdata);
                 });
             } catch {

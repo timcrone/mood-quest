@@ -86,32 +86,94 @@ function getQuestionnaireResponses(client) {
                     let retdata = { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
                         bdrs10: [{}], bdrs11: [{}], bdrs12: [{}], bdrs13: [{}], bdrs14: [{}], bdrs15: [{}], bdrs16: [{}], bdrs17: [{}], bdrs18: [{}], bdrs19: [{}],
                         bdrs20: [{}], FirstDate: moment() };
-                    bundle.entry.forEach((record) => {
-                        retdata.bdrs01.unshift({x: moment(record.resource.authored), y: record.resource.item[0].answer[0].valueInteger});
-                        retdata.bdrs02.unshift({x: moment(record.resource.authored), y: record.resource.item[1].answer[0].valueInteger});
-                        retdata.bdrs03.unshift({x: moment(record.resource.authored), y: record.resource.item[2].answer[0].valueInteger});
-                        retdata.bdrs04.unshift({x: moment(record.resource.authored), y: record.resource.item[3].answer[0].valueInteger});
-                        retdata.bdrs05.unshift({x: moment(record.resource.authored), y: record.resource.item[4].answer[0].valueInteger});
-                        retdata.bdrs06.unshift({x: moment(record.resource.authored), y: record.resource.item[5].answer[0].valueInteger});
-                        retdata.bdrs07.unshift({x: moment(record.resource.authored), y: record.resource.item[6].answer[0].valueInteger});
-                        retdata.bdrs08.unshift({x: moment(record.resource.authored), y: record.resource.item[7].answer[0].valueInteger});
-                        retdata.bdrs09.unshift({x: moment(record.resource.authored), y: record.resource.item[8].answer[0].valueInteger});
-                        retdata.bdrs10.unshift({x: moment(record.resource.authored), y: record.resource.item[9].answer[0].valueInteger});
-                        retdata.bdrs11.unshift({x: moment(record.resource.authored), y: record.resource.item[10].answer[0].valueInteger});
-                        retdata.bdrs12.unshift({x: moment(record.resource.authored), y: record.resource.item[11].answer[0].valueInteger});
-                        retdata.bdrs13.unshift({x: moment(record.resource.authored), y: record.resource.item[12].answer[0].valueInteger});
-                        retdata.bdrs14.unshift({x: moment(record.resource.authored), y: record.resource.item[13].answer[0].valueInteger});
-                        retdata.bdrs15.unshift({x: moment(record.resource.authored), y: record.resource.item[14].answer[0].valueInteger});
-                        retdata.bdrs16.unshift({x: moment(record.resource.authored), y: record.resource.item[15].answer[0].valueInteger});
-                        retdata.bdrs17.unshift({x: moment(record.resource.authored), y: record.resource.item[16].answer[0].valueInteger});
-                        retdata.bdrs18.unshift({x: moment(record.resource.authored), y: record.resource.item[17].answer[0].valueInteger});
-                        retdata.bdrs19.unshift({x: moment(record.resource.authored), y: record.resource.item[18].answer[0].valueInteger});
-                        retdata.bdrs20.unshift({x: moment(record.resource.authored), y: record.resource.item[19].answer[0].valueInteger});
-                        // retdata.Date.unshift(moment(record.resource.authored).format("YYYY-MM-DD"));
-                        if (moment(record.resource.authored) < retdata["FirstDate"]) {
-                            retdata["FirstDate"] = moment(record.resource.authored);
-                        }
-                    });
+                    try {
+                        bundle.entry.forEach((record) => {
+                            retdata.bdrs01.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[0].answer[0].valueInteger
+                            });
+                            retdata.bdrs02.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[1].answer[0].valueInteger
+                            });
+                            retdata.bdrs03.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[2].answer[0].valueInteger
+                            });
+                            retdata.bdrs04.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[3].answer[0].valueInteger
+                            });
+                            retdata.bdrs05.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[4].answer[0].valueInteger
+                            });
+                            retdata.bdrs06.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[5].answer[0].valueInteger
+                            });
+                            retdata.bdrs07.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[6].answer[0].valueInteger
+                            });
+                            retdata.bdrs08.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[7].answer[0].valueInteger
+                            });
+                            retdata.bdrs09.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[8].answer[0].valueInteger
+                            });
+                            retdata.bdrs10.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[9].answer[0].valueInteger
+                            });
+                            retdata.bdrs11.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[10].answer[0].valueInteger
+                            });
+                            retdata.bdrs12.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[11].answer[0].valueInteger
+                            });
+                            retdata.bdrs13.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[12].answer[0].valueInteger
+                            });
+                            retdata.bdrs14.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[13].answer[0].valueInteger
+                            });
+                            retdata.bdrs15.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[14].answer[0].valueInteger
+                            });
+                            retdata.bdrs16.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[15].answer[0].valueInteger
+                            });
+                            retdata.bdrs17.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[16].answer[0].valueInteger
+                            });
+                            retdata.bdrs18.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[17].answer[0].valueInteger
+                            });
+                            retdata.bdrs19.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[18].answer[0].valueInteger
+                            });
+                            retdata.bdrs20.unshift({
+                                x: moment(record.resource.authored),
+                                y: record.resource.item[19].answer[0].valueInteger
+                            });
+                            // retdata.Date.unshift(moment(record.resource.authored).format("YYYY-MM-DD"));
+                            if (moment(record.resource.authored) < retdata["FirstDate"]) {
+                                retdata["FirstDate"] = moment(record.resource.authored);
+                            }
+                        });
+                    } catch {}
                     resolve(retdata);
                 });
             } else {
