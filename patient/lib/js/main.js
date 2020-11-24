@@ -1,6 +1,6 @@
 // Sets up the activities and so on for the web page.
 
-const LOCAL=true
+const LOCAL=false
 
 barratingsMood();
 let current_mood_response = {};

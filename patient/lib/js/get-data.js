@@ -64,23 +64,21 @@ function getMoodQuestionnaireResponses(client) {
                 let id = quest.entry[0].resource.id;
                 client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
                     let retdata = {
-                        Anxious: [],
-                        Elated: [],
-                        Sad: [],
-                        Angry: [],
-                        Irritable: [],
-                        Energetic: [],
-                        Date: [],
+                        Anxious: [{}],
+                        Elated: [{}],
+                        Sad: [{}],
+                        Angry: [{}],
+                        Irritable: [{}],
+                        Energetic: [{}],
                         FirstDate: moment()
                     };
                     bundle.entry.forEach((record) => {
-                        retdata.Anxious.unshift(record.resource.item[0].answer[0].valueInteger);
-                        retdata.Elated.unshift(record.resource.item[1].answer[0].valueInteger);
-                        retdata.Sad.unshift(record.resource.item[2].answer[0].valueInteger);
-                        retdata.Angry.unshift(record.resource.item[3].answer[0].valueInteger);
-                        retdata.Irritable.unshift(record.resource.item[4].answer[0].valueInteger);
-                        retdata.Energetic.unshift(record.resource.item[5].answer[0].valueInteger);
-                        retdata.Date.unshift(moment(record.resource.authored).format("YYYY-MM-DD"));
+                        retdata.Anxious.unshift({x: moment(record.resource.authored), y: record.resource.item[0].answer[0].valueInteger});
+                        retdata.Elated.unshift({x: moment(record.resource.authored), y: record.resource.item[1].answer[0].valueInteger});
+                        retdata.Sad.unshift({x: moment(record.resource.authored), y: record.resource.item[2].answer[0].valueInteger});
+                        retdata.Angry.unshift({x: moment(record.resource.authored), y: record.resource.item[3].answer[0].valueInteger});
+                        retdata.Irritable.unshift({x: moment(record.resource.authored), y: record.resource.item[4].answer[0].valueInteger});
+                        retdata.Energetic.unshift({x: moment(record.resource.authored), y: record.resource.item[5].answer[0].valueInteger});
                         if (moment(record.resource.authored) < retdata["FirstDate"]) {
                             retdata["FirstDate"] = moment(record.resource.authored);
                         }
@@ -90,13 +88,12 @@ function getMoodQuestionnaireResponses(client) {
             } catch {
                 console.log("Could not find questionnaire");
                 resolve({
-                    Anxious: [],
-                    Elated: [],
-                    Sad: [],
-                    Angry: [],
-                    Irritable: [],
-                    Energetic: [],
-                    Date: [],
+                    Anxious: [{}],
+                    Elated: [{}],
+                    Sad: [{}],
+                    Angry: [{}],
+                    Irritable: [{}],
+                    Energetic: [{}],
                     FirstDate: moment()
                 });
             }

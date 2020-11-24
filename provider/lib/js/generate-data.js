@@ -1,8 +1,7 @@
 // Generates BDRS and mood data for the patient
 // Automatically generates responses for the patient
-// Erases all extant responses for the patient
-// * BDRS: retrospective responses up to 52 biweekly instances, at 75% probability
-// * mood: retrospective responses up to 730 daily instances, at 70% probability
+// * BDRS: retrospective responses up to 14 biweekly instances, at 75% probability
+// * mood: retrospective responses up to 196 daily instances, at 70% probability
 // * Random BDRS results are scaled to the published means and standard deviations
 // * Random mood results are initially generated along a normal distribution
 // * Individual mood results are only allowed to vary by 2 points per day, if the prior day exists

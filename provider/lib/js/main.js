@@ -1,4 +1,4 @@
-const LOCAL=true
+const LOCAL=false
 
 ///// Begin execution
 barratings();
