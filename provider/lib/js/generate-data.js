@@ -59,6 +59,7 @@ function createMoodData(count) {
         irritable: generateRandValues(count, 2, 2, 1, 7, 1),
         sad: generateRandValues(count, 2, 2, 1, 7, 1)
     }
+    console.log(values);
     return values;
 }
 
@@ -92,6 +93,7 @@ function createBDRSData(count) {
     for (let _quest = 0; _quest < m_std.length; _quest++) {
         values.push(generateRandValues(count, m_std[_quest][0], m_std[_quest][1], 0, 3, 4));
     }
+    console.log(values);
     return values;
 }
 
