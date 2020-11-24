@@ -61,8 +61,9 @@ function getMoodQuestionnaireResponses(client) {
     return new Promise((resolve, reject) => {
         getMoodQuestionnaire(client).then((quest) => {
             try {
+                let pid = client.patient.id;
                 let id = quest.entry[0].resource.id;
-                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
+                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "&_sort=-authored&_count=" + count).then((bundle) => {
                     let retdata = {
                         Anxious: [{}],
                         Elated: [{}],
@@ -151,7 +152,7 @@ function _addMoodResponseBody(client, data, date, forceCreate) {
         let response = {
             resourceType: "QuestionnaireResponse",
             status: cur_status,
-            subject: client.patient.id,
+            subject: "Patient/" + client.patient.id,
             authored: time,
             item: items,
             questionnaire: "Questionnaire/" + quest

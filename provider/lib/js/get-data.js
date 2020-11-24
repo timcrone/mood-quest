@@ -80,8 +80,9 @@ function getQuestionnaireResponses(client) {
     return new Promise((resolve, reject) => {
         getQuestionnaire(client).then((quest) => {
             if (quest.total > 0) {
+                let pid = client.patient.id;
                 let id = quest.entry[0].resource.id;
-                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&_sort=-authored&_count=" + count).then((bundle) => {
+                client.request("QuestionnaireResponse?questionnaire=" + id + "&status=completed&subject=Patient/" + pid + "_sort=-authored&_count=" + count).then((bundle) => {
                     let retdata = { bdrs01: [{}], bdrs02: [{}], bdrs03: [{}], bdrs04: [{}], bdrs05: [{}], bdrs06: [{}], bdrs07: [{}], bdrs08: [{}], bdrs09: [{}],
                         bdrs10: [{}], bdrs11: [{}], bdrs12: [{}], bdrs13: [{}], bdrs14: [{}], bdrs15: [{}], bdrs16: [{}], bdrs17: [{}], bdrs18: [{}], bdrs19: [{}],
                         bdrs20: [{}], FirstDate: moment() };
@@ -185,7 +186,7 @@ function _addResponseBody(client, data, date, forceCreate) {
         let response = {
             resourceType: "QuestionnaireResponse",
             status: cur_status,
-            subject: client.patient.id,
+            subject: "Patient/" + client.patient.id,
             authored: time,
             item: items,
             questionnaire: "Questionnaire/" + quest
