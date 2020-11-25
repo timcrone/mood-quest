@@ -64,7 +64,7 @@ function createMoodData(count) {
 }
 
 async function generateMoodHistory(client) {
-    let count = 730; // time window
+    let count = 300; // time window
     let prob = 0.70; // probability of getting a reading for a day
     let data = createMoodData(count);
     for (let _count = 0; _count < count; _count++) {
@@ -158,7 +158,7 @@ function correlateValues(bdrs, mood) {
 }
 
 async function generateBDRSHistory(client, moodData) {
-    let count = 52; // number of iterations
+    let count = 26; // number of iterations
     let prob = 0.75; // probability
     let data = createBDRSData(count);
     for (let _bdrsCount = 0; _bdrsCount < count; _bdrsCount++) {
