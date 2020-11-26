@@ -4,6 +4,7 @@ const LOCAL=false
 
 barratingsMood();
 let current_mood_response = {};
+let currentMoodQuestionnaire = "";
 
 if (LOCAL) {
     Promise.resolve(new FHIR.client({
