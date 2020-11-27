@@ -29,6 +29,7 @@ function displayPatient(pt) {
 
 // Gets the mood questionnaire reference; returns the FHIR ID for the questionnaire
 async function checkMoodQuestionnaire(client) {
+    console.log(currentMoodQuestionnaire);
     if (currentMoodQuestionnaire.length > 0) {
         return currentMoodQuestionnaire;
     }

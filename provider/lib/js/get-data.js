@@ -46,7 +46,9 @@ function displayPatientAndDOB(pt) {
 
 // Gets the BDRS questionnaire reference; returns the FHIR ID for the questionnaire
 async function checkQuestionnaire(client) {
+    console.log(currentQuestionnaire);
     if (currentQuestionnaire.length > 0) {
+        console.log("Returning known questionnaire");
         return currentQuestionnaire;
     }
     let result = await getQuestionnaire(client);
