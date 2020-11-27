@@ -58,7 +58,7 @@ async function checkQuestionnaire(client) {
     } catch {}
     console.log("questionnaire search results:", result);
     result = await client.create(defaultQuestionnaire());
-    console.log("created new mood questionnaire: ", result);
+    console.log("created new bdrs questionnaire: ", result);
     try {
         currentQuestionnaire = result.entry[0].resource.id;
         return currentQuestionnaire;
@@ -313,8 +313,10 @@ function _setupBody(client) {
     });
 
     checkQuestionnaire(client).then((result) => {
+        currentQuestionnaire = result;
         document.getElementById('bdrs_save').addEventListener('click', addQuestionnaireResponse);
         checkMoodQuestionnaire(client).then((result) => {
+            currentMoodQuestionnaire = result;
             document.getElementById('generateButton').addEventListener('click', createHistory);
             document.getElementById('chartButton').addEventListener('click', displayChart);
         })
