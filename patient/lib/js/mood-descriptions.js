@@ -57,7 +57,7 @@ function setDescriptionMoodIrritable(val) { _setMoodGeneralDescription("mood05",
 function setDescriptionMoodEnergetic(val) { _setMoodGeneralDescription("mood06", val)}
 
 function qMoodName() {
-    return "https://doi.org/10.1016/j.jad.2016.06.065:version:1.0";
+    return "https://doi.org/10.1016/j.jad.2016.06.065:version:1.0.1";
 }
 
 function defaultMoodQuestionnaire() {

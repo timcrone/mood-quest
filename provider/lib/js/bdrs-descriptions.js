@@ -201,7 +201,7 @@ function setDescriptionBDRS20(val) { let id="bdrs20"; let result = "undefined"; 
     default: result = "undefined"; } setDescription(id, result); }
 
 function qName() {
-    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:v1.0.0";
+    return "https://doi.org/10.1111/j.1399-5618.2007.00536.x:v1.0.1";
 }
 
 function defaultQuestionnaire() {
